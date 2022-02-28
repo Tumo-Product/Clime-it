@@ -46,6 +46,10 @@ const network = {
 
         create: async (post) => {
             return await axios.post(config.posts.create, { post: JSON.stringify(post) });
+        },
+
+        comment: async (obj) => {
+            return await axios.post(config.posts.comment, { pid: obj.pid, userId: obj.userId, comment: obj.comment });
         }
-    }   
+    }
 }

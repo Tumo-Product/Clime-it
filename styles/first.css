@@ -123,15 +123,17 @@
 
     display: flex;
     justify-content: center;
+    z-index: 1;
 }
 
-#post .separator {
+#postSeparator {
     position: absolute;
     top: 98px;
     height: 5px;
 }
 
 #post .content {
+    transition: 0.3s;
     position: absolute;
     top: 111px;
     width: 657px;

@@ -3,8 +3,14 @@
         "create"    : "Create a post",
         "comment"   : "Comment some stuff"
     },
-    "sets": {
-        "digital": "one",
-        "digital_awareness": "Question example"
+    "questions": {
+        "digital":[
+            "example digital question 1",
+            "example digital question 2"
+        ],
+        "awareness": [
+            "example awareness question 1",
+            "example awareness question 2"
+        ]
     }
 }

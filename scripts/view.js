@@ -46,9 +46,17 @@ const view = {
     },
 
     tasks: {
+        setQuestion: (question) => {
+            $("#post #question").html(question);
+        },
+
+        setContent: (content) => {
+            $("#post .content").html(content);
+        },
+
         setupPostsView: async (skills, instruction, question) => {
             $("#shortInstruction").html(instruction);
-            $("#post #question").html(question);
+            view.tasks.setQuestion(question);
             
             for (let i = 0; i < skills.length; i++) {
                 $("#skillsContainer .skills").append(`<img src="../icons/skills/${skills[i]}.svg">`);
@@ -70,7 +78,10 @@ const view = {
             $("#post").addClass("comment");
             $("#post .content").html(content);
 
-            await timeout(700);
+            await timeout(110);
+            $("#contentArea").attr("placeholder", "Your comment");
+
+            await timeout(600);
             $("#post .content").removeClass("invisible");
         }
     }
