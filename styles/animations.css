@@ -1,0 +1,34 @@
+/* Transitions */
+.closedHorizontally {
+    width: 0 !important;
+}
+
+.closedVertically {
+    height: 0 !important;
+    padding: 0 !important;
+}
+
+#content.closedVertically {
+    top: 400px !important;
+}
+
+.underView {
+    bottom: -40px !important;
+}
+
+.overView {
+    top: -120px !important;
+}
+
+#contentArea.comment {
+    /* add padding top */
+}
+
+#post.comment {
+    width: 731px !important;
+    height: 292px !important;
+}
+
+#post.comment .separator {
+    width: 557px !important;
+}

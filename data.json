@@ -1,0 +1,10 @@
+{
+    "instructions": {
+        "create"    : "Create a post",
+        "comment"   : "Comment some stuff"
+    },
+    "sets": {
+        "digital": "one",
+        "digital_awareness": "Question example"
+    }
+}

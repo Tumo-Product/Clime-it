@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=900, initial-scale=1.0">
+    <title>Clime-it</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="../styles/fonts.css">
+    <link rel="stylesheet" href="../styles/filter.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/first.css">
+    <link rel="stylesheet" href="../styles/animations.css">
+    <link rel="stylesheet" href="../styles/states.css">
+    <link rel="stylesheet" href="../styles/loader.css">
+</head>
+
+<body>
+    <div id="bodyContainer">
+        <div id="views">
+            <div id="first" class="view">
+                <div id="loginContainer">
+                    <div id="gradient"></div>
+
+                    <div id="loginWindow" class="glass">
+                        <p id="smallInstruction">Short instruction/introduction 1-2 sentences</p>
+                        <p id="bigInstruction">Your username</p>
+                        <input type="text" id="usernameInput" placeholder="Type your username here">
+                        
+                        <div class="button" id="validateButton">
+                            <img class="icon current" src="../icons/glassCheckmark.png">
+                        </div>
+                    </div>
+
+                    <div id="collaborationWindow" class="glass">
+                        <div id="collabText">Your collaborator is ...</div>
+                        <div class="button" id="validateCollab">
+                            <img class="icon current" src="../icons/collaboration.png">
+                        </div>
+                    </div>
+                </div>
+                <div id="whitespace"></div>
+
+                <div class="button underView" id="playButton">
+                    <div class="inside"></div>
+                    <img class="icon current" src="../icons/play.png">
+                </div>
+
+                <!-- Create post view -->
+                <div class="invisible" id="shortInstruction"></div>
+
+                <div class="question overView" id="post">
+                    <div id="skillsContainer">
+                        <div class="skills">
+                            <img>
+                            <div class="separator"></div>
+                            <img>
+                        </div>
+                    </div>
+
+                    <p id="question"></p>
+                </div>
+
+                <textarea class="closedVertically" id="content" placeholder="Your content"></textarea>
+
+                <div class="button navigator deactivated invisible disabled" id="continueButton">
+                    <div class="inside"></div>
+                    <img src="../icons/checkmark.png"   class="icon current"    id="confirm">
+                    <img src="../icons/arrow.png"       class="icon"            id="downArrow">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="filter">
+        <div id="filterButtons">
+        </div>
+
+        <div id="search">
+            <input id="searchBar" type="text" placeholder="Rechercher des termes">
+            <div id="searchBtn" class="button circle">
+                <img src="../icons/search.png" alt="" class="icon current">
+                <div class="inside"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loadingScreen">
+        <div id="loader">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </div>
+
+    <script src="../scripts/tools.js"></script>
+    <script src="../scripts/network.js"></script>
+    <script src="../scripts/setup.js"></script>
+    <script src="../scripts/view.js"></script>
+</body>
+
+</html>

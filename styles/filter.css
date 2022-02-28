@@ -1,0 +1,89 @@
+#filter {
+    position: absolute;
+    width: 777px;
+    height: 64px;
+    top: 18px;
+
+    align-items: center;
+    display: none;
+}
+
+#search {
+    position: absolute;
+    right: 0;
+    width: 388px;
+    height: 64px;
+
+    display: flex;
+    align-items: center;
+}
+
+#searchBar {
+    position: absolute;
+    right: 0;
+}
+
+#searchBar {
+    border: none;
+    height: 64px;
+    width: 100%;
+    border-radius: 32px;
+    background-color: #F3F3F3;
+    box-shadow: inset -3px -3px 5px 0 #FEFEFE, inset 3px 3px 5px 0 rgba(222,222,230,0.5);
+    padding-left: 26px;
+    padding-top: 5px;
+
+    transition: 0.15s;
+    outline: none;
+
+    color: #5c7ba5;
+    font-size: 22px;
+    font-family: FedraDemi;
+}
+
+#searchBar:hover{
+    opacity: 0.7;
+}
+
+#searchBar::placeholder {
+    color: rgba(89,107,128,0.4);
+    font-size: 22px;
+    font-family: FedraDemi;
+}
+
+#searchBtn {
+    height: 58px;
+    width: 58px;
+    box-shadow: -3px -3px 3px 0 #FEFEFE, 3px 3px 3px 0 #DEDEE6 !important;
+    position: absolute;
+    right: 0;
+}
+
+#searchBtn img {
+    width: 22px;
+}
+
+#filterButtons {
+    width: 362px;
+
+    display: flex;
+    gap: 18px;
+    height: 58px;
+}
+
+.filterButton {
+    position: relative !important;
+    height: 58px;
+    width: 58px;
+    box-shadow: 2px -1px 2px 0 #FEFEFE, -1px 2px 2px 0 #DEDEE6 !important;
+    cursor: pointer;
+}
+
+.filterButton img {
+    transition: 0.2s;
+    position: absolute;
+}
+
+.filterButton:hover img {
+    opacity: 0.8;
+}

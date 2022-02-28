@@ -1,0 +1,24 @@
+@font-face{
+    font-family: Fedra;
+    src: url('../fonts/FedraSansAltPro/FedraSansAltPro-Medium.otf');
+}
+
+@font-face{
+    font-family: FedraBook;
+    src: url('../fonts/FedraSansAltPro/FedraSansAltPro-Book.otf');
+}
+
+@font-face{
+    font-family: FedraDemi;
+    src: url('../fonts/FedraSansAltPro/FedraSansAltPro-Demi.otf');
+}
+
+@font-face {
+    font-family: FedraBold;
+    src: url('../fonts/FedraSansAltPro/FedraSansAltPro-Bold.otf');
+}
+
+@font-face {
+    font-family: FedraLight;
+    src: url('../fonts/FedraSansAltPro/FedraSansAltPro-Light.otf');
+}

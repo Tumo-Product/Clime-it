@@ -1,0 +1,36 @@
+.disabled {
+    pointer-events: none;
+}
+
+.invisible {
+    opacity: 0;
+}
+
+.current {
+    opacity: 1;
+}
+
+.current:hover {
+    opacity: 0.8;
+}
+
+.current:active {
+    opacity: 0.6;
+}
+
+.button:hover .current {
+    opacity: 0.8;
+}
+
+.button:active .current {
+    opacity: 0.6;
+}
+
+.button:active .inside {
+    opacity: 0;
+}
+
+.deactivated.navigator .current {
+    filter: grayscale(1);
+    opacity: 0.17;
+}
