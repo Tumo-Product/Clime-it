@@ -122,6 +122,7 @@ const setupCommenting = async () => {
 
     for (let i = 0; i < skills.length; i++) {
         let found = await network.posts.list({ categories: { $all: [skills[i]] } });        // TODO: Filter by published posts.
+        
         for (let f = 0; f < found.length; f++) {
             if (postsToComment.includes(found[f])) {
                 found.splice(f, 1);
