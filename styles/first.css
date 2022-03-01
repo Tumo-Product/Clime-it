@@ -59,6 +59,8 @@
 }
 
 #smallInstruction {
+    width: 88%;
+    
     font-family: FedraLight;
     top: 25px;
     font-size: 13px;
