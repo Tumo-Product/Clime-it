@@ -50,6 +50,10 @@ const network = {
 
         comment: async (obj) => {
             return await axios.post(config.posts.comment, { pid: obj.pid, userId: obj.userId, comment: obj.comment });
+        },
+
+        rate: async (pid, value) => {
+            return await axios.post(config.posts.update, { values: JSON.stringify({ $inc: { rating: value} }), pid: pid });
         }
     }
 }

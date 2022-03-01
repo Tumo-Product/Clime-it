@@ -1,6 +1,6 @@
 #filter {
     position: absolute;
-    width: 777px;
+    width: 831px;
     height: 64px;
     top: 18px;
 
@@ -11,7 +11,7 @@
 #search {
     position: absolute;
     right: 0;
-    width: 388px;
+    width: 380px;
     height: 64px;
 
     display: flex;
@@ -77,6 +77,18 @@
     width: 58px;
     box-shadow: 2px -1px 2px 0 #FEFEFE, -1px 2px 2px 0 #DEDEE6 !important;
     cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.deactivated .active {
+    opacity: 0 !important;
+}
+
+.deactivated .inactive {
+    opacity: 1;
 }
 
 .filterButton img {

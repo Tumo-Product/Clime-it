@@ -1,0 +1,261 @@
+#postsContainer, #postsShadow {
+    position: absolute;
+    bottom: 24px;
+    
+    height: 525px;
+    width: 831px;
+    border-radius: 19px;
+    height: 525px;
+    width: 831px;
+}
+
+#postsContainer {
+    background-color: #F3F3F3;
+    padding: 15px;
+    overflow: auto;
+}
+
+#postsShadow {
+    pointer-events: none;
+    z-index: 3;
+    box-shadow: inset -3px -3px 5px 0 #FEFEFE, inset 3px 3px 5px 0 rgba(222,222,230,0.5);
+}
+
+.contentsContainer {
+    position: relative;
+    height: 113px;
+    width: 801px;
+    border-radius: 19px;
+    background-color: #F3F3F3;
+    box-shadow: 3px 3px 4px 0 rgba(222,222,230,0.5), -3px -3px 4px 0 #FEFEFE;
+
+    margin-bottom: 24px;
+
+    display: flex;
+    justify-content: center;
+}
+
+.title {
+    position: absolute;
+    top: 14px;
+    right: 20px;
+
+    height: 87px;
+    width: 632px;
+
+    display: flex;
+    align-items: center;
+    font-family: Fedra;
+    font-size: 19px;
+    line-height: 25px;
+    color: rgba(89,107,128,0.8);
+}
+
+.skillsContainer {
+    height: 100%;
+    width: 149px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    left: 0;
+}
+
+.contentsContainer .skills {
+    height: 42px;
+    gap: 6.5px;
+}
+
+.contentsContainer .skills img {
+    width: 42px;
+    height: 42px;
+}
+
+.opener {
+    position: absolute;
+    bottom: -15px;
+
+    height: 30px;
+    width: 40px;
+    border-radius: 12px;
+    background-color: #F3F3F3;
+    box-shadow: 2px 2px 3px 0 #DEDEE6, -2px -2px 3px 0 #FEFEFE;
+}
+
+.opener .inside {
+    border-radius: 11px;
+}
+
+.opener img {
+    width: 21px;
+}
+
+.postContainer {
+    height: fit-content;
+    width: fit-content;
+    margin-top: 24px;
+    position: relative;
+    margin-bottom: 24px;
+}
+
+.post {
+    height: 198px;
+    width: 801px;
+    border-radius: 19px;
+    background-color: #F3F3F3;
+    box-shadow: 3px 3px 4px 0 rgba(222,222,230,0.5), -3px -3px 4px 0 #FEFEFE;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    z-index: 1;
+}
+
+.postSeparator {
+    position: absolute;
+    left: 121.5px;
+    width: 5px;
+    height: 153px;
+    border-radius: 19px;
+    box-shadow: inset -2px -2px 5px 0 #FFFFFF, inset 2px 3px 3px 1px rgba(222,222,230,0.72);
+}
+
+.ratingContainer {
+    height: 112px;
+    width: 68px;
+    border-radius: 19px;
+    background-color: #F3F3F3;
+    box-shadow: 3px 3px 4px 0 rgba(222,222,230,0.5), -3px -3px 4px 0 #FEFEFE;
+
+    position: absolute;
+    left: 28px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.ratingContainer img {
+    width: 23px;
+}
+
+.ratingContainer .separator {
+    width: 52px;
+    height: 4px;
+}
+
+.ratingSubContainer {
+    height: 54px;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative !important;
+}
+
+.postSeparator {
+    /* 20.5 gap */
+    position: absolute;
+    left: 116.5px;
+
+    width: 5px;
+    height: 153px;
+}
+
+.mainContentContainer {
+    position: absolute;
+    top: 10px;
+    left: 142px;
+
+    width: 632px;
+    height: 174px;
+}
+
+.post .date, .post .username {
+    position: absolute;
+    top: 0;
+}
+
+.username {
+    left: 0;
+    font-family: FedraBold;
+    color: rgba(89,107,128,0.8);
+    font-size: 17px;
+}
+
+.date {
+    right: 0;
+    font-family: FedraDemi;
+    color: rgba(89,107,128,0.55);
+    font-size: 15px;
+}
+
+.post .postContent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 632px;
+    height: 139px;
+
+    font-family: FedraLight;
+    color: #5C7CA6;
+    font-size: 16px;
+    line-height: 22px;
+}
+
+.postComments {
+    width: 100%;
+    position: relative;
+    top: -30px;
+    padding-top: 50px;
+    padding-bottom: 12px;
+    overflow: auto;
+
+    border-radius: 19px;
+    background-color: #F3F3F3;
+    box-shadow: inset -3px -3px 5px 0 #FEFEFE, inset 3px 3px 5px 0 rgba(222,222,230,0.5);
+}
+
+.header {
+    position: relative;
+    left: 34px;
+    font-family: FedraBold;
+    color: #EAAC7F;
+    font-size: 20px;
+    width: 740px;
+}
+
+.headerSeparator {
+    position: relative;
+    left: 25px;
+    width: 749px;
+    height: 5px;
+    margin-bottom: 7px;
+    border-radius: 19px;
+    box-shadow: inset -2px -2px 5px 0 #FFFFFF, inset 2px 3px 3px 1px rgba(222,222,230,0.72);
+}
+
+.postComment {
+    position: relative;
+    left: 34px;
+    width: 740px;
+    margin-bottom: 12px;
+}
+
+.postComment .username {
+    margin-right: 5px;
+}
+
+.postComment .postContent {
+    margin-top: 2px;
+    font-family: FedraLight;
+    font-size: 14px;
+    line-height: 19px;
+    color: #5C7CA6;
+}

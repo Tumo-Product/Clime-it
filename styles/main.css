@@ -47,12 +47,15 @@ audio {
     border-radius: 100%;
 }
 
+.circle .inside {
+    border-radius: 100%;
+}
+
 .inside {
     position: absolute;
     height: 85%;
     width: 85%;
     box-shadow: -1px 1px 1px 0 rgba(254,254,254,0.48);
-    border-radius: 100%;
 }
 
 .button {
@@ -170,4 +173,14 @@ textarea {
 .content {
     font-family: FedraLight;
     color: #5C7CA6;
+}
+
+.skills {
+    display: flex;
+    width: fit-content;
+}
+
+.skills .separator {
+    width: 5px;
+    height: 42px;
 }

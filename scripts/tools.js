@@ -25,3 +25,4 @@ const getBase64 = async (file) => {
         fr.onloadend = () => { resolve(fr.result); }
     }));
 }
+

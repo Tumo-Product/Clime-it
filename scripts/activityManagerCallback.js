@@ -1,3 +1,5 @@
+let first = true;
+
 const getIds = () => {
     window.parent.postMessage({
         application: "activity-manager",
@@ -18,6 +20,13 @@ window.addEventListener("message", event => {
             const { data } = event.data;
             userId = data.studentId;
             otherId = data.collaboratorId;
+
+            if (first) {
+                onLoad();
+                first = false;
+            } else {
+                validateCollab();
+            }
         break;
     }
 });

@@ -1,4 +1,6 @@
 const view = {
+    height  : 650,
+
     enableButton        : (id) => {
         $(`#${id}`).removeClass("deactivated disabled");
     },
@@ -7,8 +9,29 @@ const view = {
         $(`#${id}`).addClass("deactivated disabled");
     },
 
+    replaceButton      : (obj, icon) => {
+        obj.find("img").removeClass("current");
+        obj.find(icon).addClass("current");
+    },
+
+    move        : (direction) => {
+        let top = parseFloat($("#views").css("top"));
+        top += direction * view.height;
+        $("#views").css({ "top": top });
+    },
+
+    addSkills   : (container, skills) => {
+        for (let i = 0; i < skills.length; i++) {
+            container.find(".skills").append(`<img src="../icons/skills/${skills[i]}.svg">`);
+            if (i + 1 !== skills.length) {
+                container.find(".skills").append(`<div class="separator"></div>`);
+            }
+        }
+    },
+
     skillColors         : {
         decarbonization : "#B2B242",
+        greening        : "#62B585",
         transportation  : "#62B585",
         awareness       : "#E0AB2F",
         clothing        : "#4B8879",
@@ -58,12 +81,7 @@ const view = {
             $("#shortInstruction").html(instruction);
             view.tasks.setQuestion(question);
             
-            for (let i = 0; i < skills.length; i++) {
-                $("#skillsContainer .skills").append(`<img src="../icons/skills/${skills[i]}.svg">`);
-                if (i + 1 !== skills.length) {
-                    $("#skillsContainer .skills").append(`<div class="separator"></div>`);
-                }
-            }
+            view.addSkills($("#skillsContainer"), skills);
 
             $("#continueButton").removeClass("invisible");
             $("#post").removeClass("overView");

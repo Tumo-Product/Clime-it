@@ -12,16 +12,20 @@ const minCommentLength = 30, maxCommentLength = 200;
 
 let commenting = false;
 let postsToComment = [];
+let questions;
 
 const onLoad = async () => {
-    getIds();
-
     let name    = await network.getSetName();
     let data    = await network.getData();
+    questions   = data.questions;
     skills      = name.split("_");
 
+    for (const skill in questions) {
+        filter.add(skill);
+    }
+
     for (let i = 0; i < skills.length; i++) {
-        let currQuestions = shuffle(data.questions[skills[i]]);
+        let currQuestions = shuffle(questions[skills[i]]);
         questionsToAnswer.push(currQuestions[0]);
         if (otherId === undefined) break;
     }
@@ -43,13 +47,13 @@ const onLoad = async () => {
 
 const setupEvents = () => {
     $("#validateButton").click(validateMe);
-    $("#validateCollab").click(validateCollab);
+    $("#validateCollab").click(getIds);
     $("#playButton").click(onStart);
-
 
     $("#contentArea").attr("maxlength", maxPostLength);
     document.getElementById("contentArea").addEventListener("input", handleContentInputs);
     $("#continueButton").click(nextStep);
+    $("#searchBtn").click(filter.search);
 }
 
 const validateMe = async () => {
@@ -62,8 +66,10 @@ const validateMe = async () => {
 }
 
 const validateCollab = async () => {
-    getIds();
     let username = await network.users.validate(otherId);
+    if (username) {
+        $("#collabText").html("Your collaborator is " + username);
+    }
 }
 
 const handleContentInputs = async () => {
@@ -89,14 +95,20 @@ const nextStep = async () => {
         let resp = await network.posts.comment(commentsCreated[index]);
         console.log(resp);
 
+        $("#contentArea").val("");
+        handleContentInputs();
+        view.tasks.setQuestion(postsToComment[index + 1].title);
+        view.tasks.setContent(postsToComment[index + 1].content);
+
+        if (commentsCreated.length === 1 && otherId !== undefined) {
+            $("#continueButton").unbind("click");
+            $("#continueButton").click(() => { posts.setup() });
+            view.replaceButton($("#continueButton"), "#downArrow");
+        }
+
         if (commentsCreated.length === postsToComment.length) {
             // TODO: switch to all posts view.
             console.log("done");
-        } else {
-            $("#contentArea").val("");
-            handleContentInputs();
-            view.tasks.setQuestion(postsToComment[index + 1].title);
-            view.tasks.setContent(postsToComment[index + 1].content);
         }
         return;
     }
@@ -104,10 +116,16 @@ const nextStep = async () => {
     let index = postsCreated.length;
     let id = index === 0 ? userId : otherId;
     postsCreated.push({ title: questionsToAnswer[index], rating: 0, content: $("#contentArea").val(), categories: skills, userId: id, status: "underModeration" });
-    let resp = await network.posts.create(postsCreated[index]);                                                                                                       // TODO: add error checking, for the "Copied" err response first of all.
+    let resp = await network.posts.create(postsCreated[index]);                                                                                                       // TODO: add error checking, for the "Copied" err response first.
     console.log(resp);
     
     if (postsCreated.length === questionsToAnswer.length) {
+        if (otherId === undefined) {
+            $("#continueButton").unbind("click");
+            $("#continueButton").click(posts.setup);
+            view.replaceButton($("#continueButton"), "#downArrow");
+        }
+        
         setupCommenting();
     } else {
         $("#contentArea").val("");
@@ -121,7 +139,7 @@ const setupCommenting = async () => {
     commenting = true;
 
     for (let i = 0; i < skills.length; i++) {
-        let found = await network.posts.list({ categories: { $all: [skills[i]] } });        // TODO: Filter by published posts.
+        let found = await network.posts.list({ categories: { $all: [skills[i]] }, status: "published" });
         
         for (let f = 0; f < found.length; f++) {
             if (postsToComment.includes(found[f])) {
@@ -149,4 +167,17 @@ const onStart = async () => {
     view.tasks.setupPostsView(skills, instructions.create, questionsToAnswer[0]);
 }
 
+// getIds();
 $(onLoad);
+
+// TESTING TOOLS ----------------------
+const intoJson = (string) => {
+    let texts = string.split("\n");
+    let finalText = "";
+
+    for (let i = 0; i < texts.length; i++) {
+        finalText += '"' + texts[i] + '"' + ",\n";
+    }
+
+    return finalText;
+}
