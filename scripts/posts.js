@@ -150,7 +150,7 @@ const postsView = {
                 </div>
 
                 <div class="postComments closedVertically">
-                    <p class="header">Comments</p>
+                    <p class="header">Commentaires</p>
                     <div class="headerSeparator"></div>
                 </div>
             </div>`);

@@ -1,7 +1,7 @@
 {
     "instructions": {
-        "create"    : "Create a post",
-        "comment"   : "Comment some stuff"
+        "create"    : "Lis la question, fais ta recherche et réponds ce que t’en penses.",
+        "comment"   : "Lis la question et la réponse d’un·e autre étudiant·e. Qu’en penses-tu ? Laisse un commentaire."
     },
     "questions": {
         "digital":[
