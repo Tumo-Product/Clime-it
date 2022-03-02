@@ -22,7 +22,7 @@ const view = {
 
     addSkills   : (container, skills) => {
         for (let i = 0; i < skills.length; i++) {
-            container.find(".skills").append(`<img src="../icons/skills/${skills[i]}.svg">`);
+            container.find(".skills").append(`<img src="../icons/skills/${skills[i]}.png">`);
             if (i + 1 !== skills.length) {
                 container.find(".skills").append(`<div class="separator"></div>`);
             }
@@ -31,7 +31,7 @@ const view = {
 
     skillColors         : {
         decarbonization : "#B2B242",
-        greening        : "#62B585",
+        greening        : "#b2b242",
         transportation  : "#62B585",
         awareness       : "#E0AB2F",
         clothing        : "#4B8879",

@@ -92,6 +92,8 @@
 }
 
 .filterButton img {
+    width: 48px;
+    height: 48px;
     transition: 0.2s;
     position: absolute;
 }
