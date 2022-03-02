@@ -50,12 +50,6 @@ const posts = {
     },
 
     add: async (data) => {
-        let questions = [];
-        let ratings = [];
-        for (const question in data) {
-            questions.push(question);
-        }
-
         for (const question in data) {
             let element = postsView.addQuestion(question, data[question][0].categories);
             let opener = element.find(".opener");
@@ -75,7 +69,11 @@ const posts = {
             posts.opened[question] = false;
         } else {
             view.replaceButton(opener, ".minus");
-            postsView.addPosts(posts.currData[question], postsView.elements[question]);
+
+            let questionPosts   = posts.currData[question];
+            questionPosts       = questionPosts.sort((a, b) => b.rating - a.rating);
+            
+            postsView.addPosts(questionPosts, postsView.elements[question]);
             posts.opened[question] = true;
         }
     },

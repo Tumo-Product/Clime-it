@@ -107,7 +107,6 @@ const nextStep = async () => {
         }
 
         if (commentsCreated.length === postsToComment.length) {
-            // TODO: switch to all posts view.
             console.log("done");
         }
         return;
