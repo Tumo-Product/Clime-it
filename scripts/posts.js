@@ -64,10 +64,19 @@ const posts = {
     togglePosts: async (question, opener) => {
         if (posts.opened[question]) {
             let postIds = [];
+            let openComments = false;
             for (let i = 0; i < posts.currData[question].length; i++) {
-                postIds.push(posts.currData[question][i].pid);
+                let pid = posts.currData[question][i].pid;
+                postIds.push(pid);
+
+                if (postsView.commentsOpened[pid] === true) {
+                    openComments = true;
+                    postsView.toggleComments(pid);
+                }
             }
             
+            if (openComments) await timeout(500);
+
             postsView.removePosts(postIds);
             view.replaceButton(opener, ".plus");
             posts.opened[question] = false;
