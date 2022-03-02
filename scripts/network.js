@@ -1,4 +1,4 @@
-axios.defaults.baseURL = "https://content-tools.tumo.world:4000";
+axios.defaults.baseURL = "https://content-tools.tumo.world:4017";
 
 const config = {
     users: {
@@ -6,11 +6,12 @@ const config = {
         create  : '/climate/users/create'
     },
     posts: {
-        comment : '/climate/posts/comment',
-        create  : '/climate/posts/create',
-        delete  : '/climate/posts/delete',
-        update  : '/climate/posts/update',
-        list    : '/climate/posts/list'
+        comment     : '/climate/posts/comment',
+        create      : '/climate/posts/create',
+        delete      : '/climate/posts/delete',
+        update      : '/climate/posts/update',
+        updateOne   : '/climate/posts/update_one',
+        list        : '/climate/posts/list'
     }
 }
 
@@ -45,7 +46,8 @@ const network = {
         },
 
         create: async (post) => {
-            return await axios.post(config.posts.create, { post: JSON.stringify(post) });
+            let resp = await axios.post(config.posts.create, { post: JSON.stringify(post) });
+            return resp.data.added;
         },
 
         comment: async (obj) => {
@@ -54,6 +56,14 @@ const network = {
 
         rate: async (pid, value) => {
             return await axios.post(config.posts.update, { values: JSON.stringify({ $inc: { rating: value} }), pid: pid });
+        },
+
+        publish: async (pid) => {
+            return await axios.post(config.posts.updateOne, { values: JSON.stringify({ status: "published" }), pid: pid });
+        },
+
+        delete: async (pid) => {
+            return await axios.post(config.posts.delete, { pid: pid });
         }
     }
 }

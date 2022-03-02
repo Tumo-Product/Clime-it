@@ -13,6 +13,7 @@ const minCommentLength = 30, maxCommentLength = 200;
 let commenting = false;
 let postsToComment = [];
 let questions;
+let responses = [];
 
 const onLoad = async () => {
     let name    = await network.getSetName();
@@ -68,7 +69,7 @@ const validateMe = async () => {
 const validateCollab = async () => {
     let username = await network.users.validate(otherId);
     if (username) {
-        $("#collabText").html("Your collaborator is " + username);
+        $("#collabText").html("Ton·ta collaborateur·trice est " + username);
     }
 }
 
@@ -93,7 +94,7 @@ const nextStep = async () => {
         let id = index === 0 ? userId : otherId;
         commentsCreated.push({ pid: postsToComment[index].pid, userId: id, comment: $("#contentArea").val() });
         let resp = await network.posts.comment(commentsCreated[index]);
-        console.log(resp);
+        responses.push(commentsCreated[index]);
 
         $("#contentArea").val("");
         handleContentInputs();
@@ -102,7 +103,7 @@ const nextStep = async () => {
 
         if (commentsCreated.length === 1 && otherId !== undefined) {
             $("#continueButton").unbind("click");
-            $("#continueButton").click(() => { posts.setup() });
+            $("#continueButton").click(() => { setAnswers(responses); posts.setup() });
             view.replaceButton($("#continueButton"), "#downArrow");
         }
 
@@ -116,12 +117,12 @@ const nextStep = async () => {
     let id = index === 0 ? userId : otherId;
     postsCreated.push({ title: questionsToAnswer[index], rating: 0, content: $("#contentArea").val(), categories: skills, userId: id, status: "underModeration" });
     let resp = await network.posts.create(postsCreated[index]);                                                                                                       // TODO: add error checking, for the "Copied" err response first.
-    console.log(resp);
+    responses.push(resp.pid);
     
     if (postsCreated.length === questionsToAnswer.length) {
         if (otherId === undefined) {
             $("#continueButton").unbind("click");
-            $("#continueButton").click(posts.setup);
+            $("#continueButton").click(() => { setAnswers(responses); posts.setup() });
             view.replaceButton($("#continueButton"), "#downArrow");
         }
         
@@ -166,8 +167,8 @@ const onStart = async () => {
     view.tasks.setupPostsView(skills, instructions.create, questionsToAnswer[0]);
 }
 
-// getIds();
-$(onLoad);
+getIds();
+// $(onLoad);
 
 // TESTING TOOLS ----------------------
 const intoJson = (string) => {

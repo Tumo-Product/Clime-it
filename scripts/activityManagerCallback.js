@@ -18,14 +18,16 @@ window.addEventListener("message", event => {
     switch(event.data.message) {
         case 'init-response':
             const { data } = event.data;
-            userId = data.studentId;
-            otherId = data.collaboratorId;
-
-            if (first) {
-                onLoad();
-                first = false;
-            } else {
-                validateCollab();
+            if (document.location.href.includes("viewer")) {
+                userId = data.studentId;
+                otherId = data.collaboratorId;
+    
+                if (first) {
+                    $(onLoad());
+                    first = false;
+                } else {
+                    validateCollab();
+                }
             }
         break;
     }
@@ -41,7 +43,7 @@ const setAnswers = (outcome) => {
     window.parent.postMessage({
         application: 'activity-manager',
         message: 'set-answers',
-        data: { answers: [outcome] }
+        data: { answers: outcome }
     }, '*');
 }
 
