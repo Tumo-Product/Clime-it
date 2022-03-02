@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=900, initial-scale=1.0">
+    <title>Clime-it</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="../styles/fonts.css">
+    <link rel="stylesheet" href="../styles/filter.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/first.css">
+    <link rel="stylesheet" href="../styles/posts.css">
+    <link rel="stylesheet" href="../styles/animations.css">
+    <link rel="stylesheet" href="../styles/states.css">
+    <link rel="stylesheet" href="../styles/loader.css">
+</head>
+
+<body>
+    <div id="bodyContainer">
+        <div id="views">
+            <div id="firstView" class="view">
+                <div id="loginContainer">
+                    <div id="gradient"></div>
+
+                    <div id="loginWindow" class="glass">
+                        <p id="smallInstruction">Si tu n’as pas de nom d’utilisateur, saisis-le en bas et vérifie s’il est disponible, en cliquant ci-dessous. Pour vérifier le nom d’utilisateur de ton·ta collaborateur·trice clique sur le bouton « Collaboration ».</p>
+                        <p id="bigInstruction">Saisis ton nom d’utilisateur</p>
+                        <input type="text" id="usernameInput" placeholder="Type your username here">
+                        
+                        <div class="button" id="validateButton">
+                            <img class="icon current" src="../icons/glassCheckmark.png">
+                        </div>
+                    </div>
+
+                    <div id="collaborationWindow" class="glass">
+                        <div id="collabText">Ton·ta collaborateur·trice est ...</div>
+                        <div class="button" id="validateCollab">
+                            <img class="icon current" src="../icons/collaboration.png">
+                        </div>
+                    </div>
+                </div>
+                <div id="whitespace"></div>
+
+                <div class="button underView circle" id="playButton">
+                    <div class="inside"></div>
+                    <img class="icon current" src="../icons/play.png">
+                </div>
+
+                <!-- Create post view -->
+                <div class="invisible" id="shortInstruction"></div>
+
+                <div class="overView" id="post">
+                    <div id="skillsContainer">
+                        <div class="skills"></div>
+                    </div>
+
+                    <p id="question"></p>
+                    <div class="separator" id="postSeparator"></div>
+                    <p class="content invisible"></p>
+                </div>
+
+                <div id="content" class="closedVertically">
+                    <textarea id="contentArea" placeholder="Your content"></textarea>
+
+                    <div id="contentLength">
+                        <span id="length">0</span>
+                        <span>/</span>
+                        <span id="maxLength">400</span>
+                    </div>
+                </div>
+
+                <div class="button circle navigator deactivated invisible disabled" id="continueButton">
+                    <div class="inside"></div>
+                    <img src="../icons/checkmark.png"   class="icon current"    id="confirm">
+                    <img src="../icons/arrow.png"       class="icon"            id="downArrow">
+                </div>
+            </div>
+
+            <div id="postsView" class="view">
+                <div id="filter">
+                    <div id="filterButtons">
+                    </div>
+
+                    <div id="search">
+                        <input id="searchBar" type="text" placeholder="Rechercher">
+                        <div id="searchBtn" class="button circle">
+                            <img src="../icons/search.png" alt="" class="icon current">
+                            <div class="inside"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="postsContainer"></div>
+                <div id="postsShadow"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loadingScreen">
+        <div id="loader">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </div>
+
+    <script src="../scripts/activityManagerCallback.js"></script>
+    <script src="../scripts/tools.js"></script>
+    <script src="../scripts/filter.js"></script>
+    <script src="../scripts/network.js"></script>
+    <script src="../scripts/flow.js"></script>
+    <script src="../scripts/posts.js"></script>
+    <script src="../scripts/view.js"></script>
+</body>
+
+</html>
