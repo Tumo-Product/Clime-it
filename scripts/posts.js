@@ -74,7 +74,7 @@ const posts = {
                     postsView.toggleComments(pid);
                 }
             }
-            
+
             if (openComments) await timeout(500);
 
             postsView.removePosts(postIds);
@@ -194,12 +194,12 @@ const postsView = {
 
     toggleComments: async (pid) => {
         if (postsView.commentsOpened[pid]) {
-            $(`#${pid}`).css("margin-bottom", 24);
+            $(`#${pid}`).attr("style", "");
             $(`#${pid} .postComments`).animate({ height: 0, padding: "0" }, 500);
 
             postsView.commentsOpened[pid] = false;
         } else {
-            $(`#${pid}`).css("margin-bottom", 0);
+            $(`#${pid}`).css("margin-bottom", -30);
             $(`#${pid} .postComments`).css({ height: "fit-content" });
             let height = parseFloat($(`#${pid} .postComments`).css("height")) + 62;
             $(`#${pid} .postComments`).css({ height: 0, padding: 0}).animate({ height: height, padding: "50px 0px 12px 0px" }, 500);
