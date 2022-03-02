@@ -93,7 +93,7 @@ const nextStep = async () => {
         let index = commentsCreated.length;
         let id = index === 0 ? userId : otherId;
         commentsCreated.push({ pid: postsToComment[index].pid, userId: id, comment: $("#contentArea").val() });
-        let resp = await network.posts.comment(commentsCreated[index]);
+        // let resp = await network.posts.comment(commentsCreated[index]);
         responses.push(commentsCreated[index]);
 
         $("#contentArea").val("");
