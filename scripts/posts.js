@@ -2,11 +2,15 @@ const posts = {
     currData: {},
     opened  : {},
 
-    reset: () => {
+    reset: async() => {
         posts.currData = {};
         posts.opened   = {};
         postsView.elements = {}
         postsView.commentsOpened = {};
+
+        $(".postContainer").addClass("disappear")
+        $(".contentsContainer").addClass("disappear");
+        await timeout(500);
         $("#postsContainer").empty();
     },
 
@@ -119,7 +123,7 @@ const postsView = {
             postsView.commentsOpened[posts[i].pid] = false;
 
             let element = $(`
-            <div class="postContainer" id="${posts[i].pid}">
+            <div class="postContainer expandPost" id="${posts[i].pid}">
                 <div class="post">
                     <div class="ratingContainer">
                         <div class="ratingSubContainer button" onclick="posts.rate('${posts[i].pid}', 1)">
@@ -147,7 +151,7 @@ const postsView = {
                     </div>
                 </div>
 
-                <div class="postComments closedVertically">
+                <div class="postComments">
                     <p class="header">Commentaires</p>
                     <div class="headerSeparator"></div>
                 </div>
@@ -182,16 +186,24 @@ const postsView = {
     toggleComments: async (pid) => {
         if (postsView.commentsOpened[pid]) {
             $(`#${pid}`).css("margin-bottom", 24);
-            $(`#${pid} .postComments`).addClass("closedVertically");
+            $(`#${pid} .postComments`).animate({ height: 0, padding: "0" }, 500);
+
             postsView.commentsOpened[pid] = false;
         } else {
             $(`#${pid}`).css("margin-bottom", 0);
-            $(`#${pid} .postComments`).removeClass("closedVertically");
+            $(`#${pid} .postComments`).css({ height: "fit-content" });
+            let height = parseFloat($(`#${pid} .postComments`).css("height")) + 62;
+            $(`#${pid} .postComments`).css({ height: 0, padding: 0}).animate({ height: height, padding: "50px 0px 12px 0px" }, 500);
+
             postsView.commentsOpened[pid] = true;
         }
     },
 
     removePosts : async (postIds) => {
+        for (let pid of postIds) {
+            $(`#${pid}`).removeClass("expandPost");
+        }
+        await timeout(500);
         for (let pid of postIds) {
             $(`#${pid}`).remove();
         }

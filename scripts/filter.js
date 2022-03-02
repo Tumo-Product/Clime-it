@@ -8,7 +8,7 @@ const filter = {
         obj.click(() => { filter.bySkill(skill) });
     },
 
-    bySkill: (skill) => {
+    bySkill: async (skill) => {
         if (filter.getActivatedCount() === 0) {
             filterView.disableAll();
         }
@@ -21,7 +21,7 @@ const filter = {
             filter.activated[skill] = true;
         }
 
-        posts.reset();
+        await posts.reset();
 
         let queries = [];
         for (const skill in filter.activated) {
@@ -33,11 +33,11 @@ const filter = {
         posts.setup(queries);
     },
 
-    search: () => {
+    search: async () => {
         let query = $("#searchBar").val().trim();
-        posts.reset();
+        await posts.reset();
         
-        let queries = [{ title: { $regex: query } }, { content: { $regex: query } }];
+        let queries = [{ title: { $regex: query, $options: "i" } }, { content: { $regex: query, $options: "i" } }]; // options: i means case insensitive
         posts.setup(queries);
     },
 
