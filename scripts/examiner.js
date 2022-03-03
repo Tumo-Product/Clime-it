@@ -1,4 +1,4 @@
-let responses = ["17f40ed6089", { pid: "17f40ed6088", userId: "2", comment: "content" } ];
+let responses;
 let curr = 0;
 let reviewingComments = false;
 let commenting = false;
@@ -64,4 +64,4 @@ moveToNext = async (award) => {
     }
 }
 
-$(onExaminerLoad);
+// $(onExaminerLoad);

@@ -29,6 +29,10 @@ window.addEventListener("message", event => {
                     validateCollab();
                 }
             }
+            if (document.location.href.includes("examiner")) {
+                responses = data.answers;
+                $(onExaminerLoad);
+            }
         break;
     }
 });
