@@ -58,7 +58,7 @@ const filterView = {
         $("#filterButtons").append(`
         <div id="${skill}" class="circle filterButton">
             <img class="inactive" src="../icons/skills/${skill}Deactivated.svg">
-            <img class="active" src="../icons/skills/${skill}.png">
+            <img class="active" src="../icons/skills/${skill}.svg">
         </div>`);
 
         return $(`#${skill}`);

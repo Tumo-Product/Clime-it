@@ -27,20 +27,26 @@
                 <div id="loginContainer">
                     <div id="gradient"></div>
 
-                    <div id="loginWindow" class="glass">
-                        <p id="smallInstruction">Si tu n’as pas de nom d’utilisateur, saisis-le en bas et vérifie s’il est disponible, en cliquant ci-dessous. Pour vérifier le nom d’utilisateur de ton·ta collaborateur·trice clique sur le bouton « Collaboration ».</p>
-                        <p id="bigInstruction">Saisis ton nom d’utilisateur</p>
-                        <input type="text" id="usernameInput" placeholder="Type your username here">
-                        
-                        <div class="button" id="validateButton">
-                            <img class="icon current" src="../icons/glassCheckmark.png">
+                    <div id="glassesContainer">
+                        <div id="loginWindow" class="glass">
+                            <img class="texture" src="../textures/glass.png">
+    
+                            <p id="smallInstruction">Si tu n’as pas de nom d’utilisateur, saisis-le en bas et vérifie s’il est disponible, en cliquant ci-dessous. Pour vérifier le nom d’utilisateur de ton·ta collaborateur·trice clique sur le bouton « Collaboration ».</p>
+                            <p id="bigInstruction">Saisis ton nom d’utilisateur</p>
+                            <input type="text" id="usernameInput" placeholder="Type your username here">
+                            
+                            <div class="button deactivated disabled" id="validateButton">
+                                <img src="../icons/glassCheckmark.png">
+                            </div>
                         </div>
-                    </div>
-
-                    <div id="collaborationWindow" class="glass">
-                        <div id="collabText">Ton·ta collaborateur·trice est ...</div>
-                        <div class="button" id="validateCollab">
-                            <img class="icon current" src="../icons/collaboration.png">
+    
+                        <div id="collaborationWindow" class="glass">
+                            <img class="texture" src="../textures/glass.png">
+                            
+                            <div id="collabText">Ton·ta collaborateur·trice est ...</div>
+                            <div class="button" id="validateCollab">
+                                <img src="../icons/collaboration.png">
+                            </div>
                         </div>
                     </div>
                 </div>

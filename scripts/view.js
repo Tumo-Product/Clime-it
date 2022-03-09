@@ -22,7 +22,7 @@ const view = {
 
     addSkills   : (container, skills) => {
         for (let i = 0; i < skills.length; i++) {
-            container.find(".skills").append(`<img src="../icons/skills/${skills[i]}.png">`);
+            container.find(".skills").append(`<img src="../icons/skills/${skills[i]}.svg">`);
             if (i + 1 !== skills.length) {
                 container.find(".skills").append(`<div class="separator"></div>`);
             }
