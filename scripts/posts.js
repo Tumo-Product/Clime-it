@@ -24,7 +24,8 @@ const posts = {
                     let found = await network.posts.list({ title: question });
 
                     for (let f = 0; f < found.length; f++) {
-                        found[f].username = await network.users.validate(found[f].userId);
+                        let user = await network.users.validate(found[f].userId);
+                        found[f].username = user.username;
                     }
 
                     if (found.length > 0) {
@@ -92,7 +93,21 @@ const posts = {
     },
 
     rate: async (pid, value) => {
+        if (value === ratings[pid]) return;
+        console.log("rating request");
+        postsView.setRating(pid, value === 1 ? "increment" : "decrement");
+        ratings[pid] = value;
+
+        $(`#${pid} .ratingContainer`).addClass("disabled");
+        await network.users.addRating(pid, value);
+        
+        if (ratings[pid] !== undefined) {
+            value = value * 2;
+        }
+
         await network.posts.rate(pid, value);
+
+        $(`#${pid} .ratingContainer`).removeClass("disabled");
     }
 }
 
@@ -135,13 +150,13 @@ const postsView = {
             <div class="postContainer expandPost" id="${posts[i].pid}">
                 <div class="post">
                     <div class="ratingContainer">
-                        <div class="ratingSubContainer button" onclick="posts.rate('${posts[i].pid}', 1)">
+                        <div class="ratingSubContainer button increment" onclick="posts.rate('${posts[i].pid}', 1)">
                             <img class="icon current" src="../icons/increment.png">
                         </div>
 
                         <div class="separator"></div>
 
-                        <div class="ratingSubContainer button" onclick="posts.rate('${posts[i].pid}', -1)">
+                        <div class="ratingSubContainer button decrement" onclick="posts.rate('${posts[i].pid}', -1)">
                             <img class="icon current" src="../icons/decrement.png">
                         </div>
                     </div>
@@ -155,8 +170,8 @@ const postsView = {
                     </div>
 
                     <div class="opener button" onclick="postsView.toggleComments('${posts[i].pid}')">
-                        <img class="icon" src="../icons/minus.png">
-                        <img class="icon current" src="../icons/plus.png">
+                        <img class="icon minus" src="../icons/minus.png">
+                        <img class="icon plus current" src="../icons/plus.png">
                     </div>
                 </div>
 
@@ -190,13 +205,25 @@ const postsView = {
         }
 
         after.after(elements);
+
+        for (let i = 0; i < posts.length; i++) {
+            if (ratings[posts[i].pid] === 1) {
+                console.log(posts[i].pid);
+                postsView.setRating(posts[i].pid, "increment");
+            } else if (ratings[posts[i].pid] === -1) {
+                postsView.setRating(posts[i].pid, "decrement");
+            }
+        }
     },
 
     toggleComments: async (pid) => {
+        let opener = $(`#${pid} .opener`);
+
         if (postsView.commentsOpened[pid]) {
             $(`#${pid}`).attr("style", "");
             $(`#${pid} .postComments`).animate({ height: 0, padding: "0" }, 500);
 
+            view.replaceButton(opener, ".plus");
             postsView.commentsOpened[pid] = false;
         } else {
             $(`#${pid}`).css("margin-bottom", -30);
@@ -204,6 +231,7 @@ const postsView = {
             let height = parseFloat($(`#${pid} .postComments`).css("height")) + 62;
             $(`#${pid} .postComments`).css({ height: 0, padding: 0}).animate({ height: height, padding: "50px 0px 12px 0px" }, 500);
 
+            view.replaceButton(opener, ".minus");
             postsView.commentsOpened[pid] = true;
         }
     },
@@ -216,5 +244,10 @@ const postsView = {
         for (let pid of postIds) {
             $(`#${pid}`).remove();
         }
-    }
+    },
+
+    setRating: async (pid, type) => {
+        $(`#${pid} .ratingSubContainer`).addClass("deactivated");
+        $(`#${pid} .${type}`).removeClass("deactivated");
+    },
 }

@@ -106,6 +106,10 @@
     bottom: -40px !important;
 }
 
+.underLoginContainer {
+    top: 500px !important;
+}
+
 .overView {
     top: -120px !important;
 }

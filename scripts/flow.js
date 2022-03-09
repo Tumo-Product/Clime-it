@@ -15,6 +15,8 @@ let postsToComment = [];
 let questions;
 let responses = [];
 
+let ratings = {};
+
 const onLoad = async () => {
     let name    = await network.getSetName();
     let data    = await network.getData();
@@ -33,7 +35,10 @@ const onLoad = async () => {
 
     instructions = data.instructions;
 
-    let username = await network.users.validate(userId);
+    let user = await network.users.validate(userId);
+    let username = user.username;
+    ratings = user.ratings;
+
     if (username) {
         view.login.showPlayButton();
         view.login.disableValidateMeButton();
@@ -47,6 +52,7 @@ const onLoad = async () => {
 }
 
 const setupEvents = () => {
+    document.getElementById("usernameInput").addEventListener("input", handleUsernameInput);
     $("#validateButton").click(validateMe);
     $("#validateCollab").click(getIds);
     $("#playButton").click(onStart);
@@ -70,6 +76,16 @@ const validateCollab = async () => {
     let username = await network.users.validate(otherId);
     if (username) {
         $("#collabText").html("Ton·ta collaborateur·trice est " + username);
+    }
+}
+
+const handleUsernameInput = async () => {
+    let validateEnabled = $("#usernameInput").val().length > 3;
+
+    if (validateEnabled) {
+        view.enableButton("validateButton");
+    } else {
+        view.disableButton("validateButton");
     }
 }
 
@@ -162,13 +178,13 @@ const setupCommenting = async () => {
 }
 
 const onStart = async () => {
-    view.login.closeView();
+    await view.login.closeView();
     await timeout(1000);
     view.tasks.setupPostsView(skills, instructions.create, questionsToAnswer[0]);
 }
 
 getIds();
-// $(onLoad);
+$(onLoad);
 
 // TESTING TOOLS ----------------------
 const intoJson = (string) => {

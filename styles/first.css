@@ -15,14 +15,25 @@
     transition: 0.6s;
 }
 
-#gradient {
-    opacity: 0.7;
+#gradientContainer {
     pointer-events: none;
     height: 496px;
     width: 761.54px;
     position: absolute;
     border-radius: 14px;
     box-shadow: inset -2px -2px 1px 0 #FEFEFE, inset 2px 2px 1px 0 rgba(167,167,175,0.34);
+
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+#gradient {
+    width: 1524px;
+    height: 1524px;
+    opacity: 0.7;
+    position: absolute;
+    left: 0;
 }
 
 #whitespace {
@@ -37,8 +48,15 @@
     transition: 0.6s;
 }
 
-#loginWindow {
+#glassesContainer {
+    position: absolute;
     top: 49px;
+    height: 397px;
+    width: 459px;
+    transition: 0.8s;
+}
+
+#loginWindow {
     height: 268px;
     width: 459px;
 }
@@ -48,7 +66,7 @@
 }
 
 #collaborationWindow {
-    bottom: 50px;
+    bottom: 0;
     height: 112px;
     width: 459px;
 }
@@ -228,6 +246,7 @@
     right: 14px;
     bottom: 8px;
     display: flex;
+    pointer-events: none;
 }
 
 #contentLength span {

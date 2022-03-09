@@ -2,8 +2,9 @@ axios.defaults.baseURL = "https://content-tools.tumo.world:4000";
 
 const config = {
     users: {
-        validate: '/climate/users/validate',
-        create  : '/climate/users/create'
+        validate    : '/climate/users/validate',
+        create      : '/climate/users/create',
+        addRating   : '/climate/users/add_rating'
     },
     posts: {
         comment     : '/climate/posts/comment',
@@ -11,7 +12,7 @@ const config = {
         delete      : '/climate/posts/delete',
         update      : '/climate/posts/update',
         updateOne   : '/climate/posts/update_one',
-        list        : '/climate/posts/list'
+        list        : '/climate/posts/list',
     }
 }
 
@@ -31,11 +32,16 @@ const network = {
     users: {
         validate: async (userId) => {
             let resp = await axios.post(config.users.validate, { userId: userId });
-            return resp.data.found === undefined ? false : resp.data.found.username;
+            return resp.data.found === undefined ? false : resp.data.found;
         },
         create: async (username, userId) => {
             let resp = await axios.post(config.users.create, {username: username, userId: userId });
             return resp.data.added === undefined ? false : resp.data.added.username;
+        },
+
+        addRating: async (pid, rating) => {
+            let resp = await axios.post(config.users.addRating, { userId: userId, rating: rating, pid: pid });
+            return resp.data.added === undefined ? false : true;
         }
     },
     

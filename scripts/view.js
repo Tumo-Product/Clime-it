@@ -31,7 +31,7 @@ const view = {
 
     skillColors         : {
         decarbonization : "#B2B242",
-        greening        : "#b2b242",
+        greening        : "#64b444",
         transportation  : "#62B585",
         awareness       : "#E0AB2F",
         clothing        : "#4B8879",
@@ -45,7 +45,7 @@ const view = {
 
     login: {
         setup: (first, second) => {
-            $("#gradient").css("background", `radial-gradient(farthest-corner at 233px 221px, ${view.skillColors[first]} 0%,  ${view.skillColors[second]} 130%)`);
+            $("#gradient").css("background", `radial-gradient(circle at 762px 762px, ${view.skillColors[first]} 16%,  ${view.skillColors[second]} 60%)`);
             if (second === undefined) {
                 $("#gradient").css("background", `${view.skillColors[first]}`);
             }
@@ -60,10 +60,21 @@ const view = {
         showPlayButton      : () => {
             $("#playButton").removeClass("underView");
         },
-        closeView      : () => {
+        closeView      : async () => {
             $("#playButton").addClass("disabled");
-            $("#loginContainer").addClass("closedHorizontally");
-            $("#whitespace").addClass("closedHorizontally");
+
+            $("#glassesContainer").addClass("underLoginContainer");
+            await timeout(1000);
+
+            let elements = [$("#loginContainer"), $("#whitespace")];
+
+            for (let element of elements) {
+                let marginTop = parseFloat(element.css("height")) / 2;
+                element.addClass("closedVertically");
+                element.addClass("invisible");
+                element.css("margin-top", marginTop)
+            }
+
             $("#playButton").addClass("disabled underView");
         }
     },

@@ -73,6 +73,23 @@ audio {
     position: absolute;
 }
 
+.glass .button img {
+    transition: 0.2s;
+    opacity: 1;
+}
+
+.glass .button:hover img {
+    opacity: 0.8;
+}
+
+.glass .button:active img {
+    opacity: 0.6;
+}
+
+.glass .deactivated.button img {
+    opacity: 0.5 !important;
+}
+
 .glass {
     position: absolute;
     border-radius: 11px;
@@ -81,6 +98,17 @@ audio {
 
     display: flex;
     justify-content: center;
+}
+
+.texture {
+    width: 100%;
+    height: 100%;
+    border-radius: 11px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.04;
+    background: url(../textures/glass.png);
 }
 
 .glass::before {
@@ -92,7 +120,7 @@ audio {
     bottom:0;
     border-radius: 11px;
     padding: 1px; 
-    background: linear-gradient(141.23deg, rgba(255, 255, 255, 0.6) 0%, rgba(196, 209, 233, 0.6) 100%); 
+    background: linear-gradient(141.23deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 50%, rgba(197, 199, 212, 0.5)); 
     -webkit-mask: 
        linear-gradient(#fff 0 0) content-box, 
        linear-gradient(#fff 0 0);
