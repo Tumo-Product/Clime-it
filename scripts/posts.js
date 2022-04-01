@@ -44,7 +44,8 @@ const posts = {
                 let found = await network.posts.list(queries[i]);
 
                 for (let f = 0; f < found.length; f++) {
-                    found[f].username = await network.users.validate(found[f].userId);
+                    let user = await network.users.validate(found[f].userId);
+                    found[f].username = user.username;
                     posts.currData[found[f].title] = found;
                     posts.opened[found[f].title] = false;
                 }
