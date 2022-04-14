@@ -13,20 +13,22 @@ const config = {
         update      : '/climate/posts/update',
         updateOne   : '/climate/posts/update_one',
         list        : '/climate/posts/list',
+    },
+    data: {
+        get : '/climate/data/get'
     }
 }
 
 const network = {
-    getSetName: async () => {
+    getSetName: async () => { // TODO: Get name from query parameters.
         let href = document.location.href;
         let splitPath = href.split("/");
         let string = splitPath[splitPath.length - 2];
         return string;
     },
     getData: async () => {
-        let data;
-        await $.get(`../data.json`, function (json) { data = json; });
-        return data;
+        let data = await axios.post(config.data.get, { language: "FR" });
+        return data.data.data;
     },
 
     users: {

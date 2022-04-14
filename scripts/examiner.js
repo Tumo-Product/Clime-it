@@ -24,16 +24,16 @@ const setupEvents = () => {
     $("#rejectButton").click(() => { moveToNext(false)});
 }
 
-moveToNext = async (award) => {
+const moveToNext = async (award) => {
     if (typeof(responses[curr]) === "string") {
         if (award) {
-            network.posts.publish(responses[curr]);
+            await network.posts.publish(responses[curr]);
         } else {
-            network.posts.delete(responses[curr]);
+            await network.posts.delete(responses[curr]);
         }
     } else {
         if (award) {
-            network.posts.comment(responses[curr]);
+            await network.posts.comment(responses[curr]);
         }
     }
 

@@ -184,7 +184,7 @@ const onStart = async () => {
 }
 
 getIds();
-$(onLoad);
+// $(onLoad);
 
 // TESTING TOOLS ----------------------
 const intoJson = (string) => {
