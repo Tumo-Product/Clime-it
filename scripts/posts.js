@@ -10,18 +10,20 @@ const posts = {
 
         $(".postContainer").addClass("disappear")
         $(".contentsContainer").addClass("disappear");
-        await timeout(500);
+        await timeout(300);
         $("#postsContainer").empty();
     },
 
     setup: async (queries) => {
+        setAnswers(responses);
+
         if (!queries) {
             $("#firstView").addClass("disabled");
             
             for (let i = 0; i < skills.length; i++) {
                 for (let q = 0; q < questions[skills[i]].length; q++) {
                     let question = questions[skills[i]][q];
-                    let found = await network.posts.list({ title: question });
+                    let found = await network.posts.list({ title: question, status: "published" });
 
                     for (let f = 0; f < found.length; f++) {
                         let user = await network.users.validate(found[f].userId);
@@ -95,7 +97,6 @@ const posts = {
 
     rate: async (pid, value) => {
         if (value === ratings[pid]) return;
-        console.log("rating request");
         postsView.setRating(pid, value === 1 ? "increment" : "decrement");
         ratings[pid] = value;
 
@@ -209,7 +210,6 @@ const postsView = {
 
         for (let i = 0; i < posts.length; i++) {
             if (ratings[posts[i].pid] === 1) {
-                console.log(posts[i].pid);
                 postsView.setRating(posts[i].pid, "increment");
             } else if (ratings[posts[i].pid] === -1) {
                 postsView.setRating(posts[i].pid, "decrement");

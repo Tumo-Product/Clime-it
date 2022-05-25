@@ -3,6 +3,8 @@ let curr = 0;
 let reviewingComments = false;
 let commenting = false;
 
+getIds();
+
 const onExaminerLoad = async () => {
     let name    = await network.getSetName();
     let data    = await network.getData();
@@ -40,14 +42,14 @@ const moveToNext = async (award) => {
     curr++;
 
     if (typeof(responses[curr]) === "string") {
-        let post = await network.posts.list({ pid: responses[curr] });
+        let post = (await network.posts.list({ pid: responses[curr] }))[0];
         post = post[0];
         view.tasks.setQuestion(post.title);
         $("#contentArea").val(post.content);
         $("#length").html(post.content.length);
     } else if (typeof(responses[curr]) === "object") {
-        let post = await network.posts.list({ pid: responses[curr].pid });
-        post = post[0];
+        let post = (await network.posts.list({ pid: responses[curr].pid }))[0];
+        view.tasks.setQuestion(post.title);
 
         if (!commenting) {
             commenting = true;
@@ -57,7 +59,6 @@ const moveToNext = async (award) => {
             view.tasks.setContent(post.content);
         }
 
-        console.log(responses[curr]);
         $("#contentArea").val(responses[curr].comment);
     } else {
         $(".navigator").addClass("deactivated disabled");

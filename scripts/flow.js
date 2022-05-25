@@ -81,12 +81,8 @@ const validateCollab = async () => {
 
 const handleUsernameInput = async () => {
     let validateEnabled = $("#usernameInput").val().length > 3;
-
-    if (validateEnabled) {
-        view.enableButton("validateButton");
-    } else {
-        view.disableButton("validateButton");
-    }
+    if (validateEnabled) view.enableButton("validateButton");
+    else view.disableButton("validateButton");
 }
 
 const handleContentInputs = async () => {
@@ -97,11 +93,8 @@ const handleContentInputs = async () => {
     $("#length").html(length);
     $("#maxLength").html(maxLength);
 
-    if (length >= minLength) {
-        view.enableButton("continueButton");
-    } else {
-        view.disableButton("continueButton");
-    }
+    if (length >= minLength) view.enableButton("continueButton");
+    else view.disableButton("continueButton");
 }
 
 const nextStep = async () => {
@@ -112,36 +105,29 @@ const nextStep = async () => {
         // let resp = await network.posts.comment(commentsCreated[index]);
         responses.push(commentsCreated[index]);
 
-        $("#contentArea").val("");
-        handleContentInputs();
-        view.tasks.setQuestion(postsToComment[index + 1].title);
-        view.tasks.setContent(postsToComment[index + 1].content);
-
-        if (commentsCreated.length === 1 && otherId !== undefined) {
-            $("#continueButton").unbind("click");
-            $("#continueButton").click(() => { setAnswers(responses); posts.setup() });
+        if (commentsCreated.length === postsToComment.length - 1) {
             view.replaceButton($("#continueButton"), "#downArrow");
         }
 
         if (commentsCreated.length === postsToComment.length) {
-            console.log("done");
+            posts.setup();
+            return;
         }
+
+        $("#contentArea").val("");
+        handleContentInputs();
+        view.tasks.setQuestion(postsToComment[index + 1].title);
+        view.tasks.setContent(postsToComment[index + 1].content);
         return;
     }
 
     let index = postsCreated.length;
     let id = index === 0 ? userId : otherId;
     postsCreated.push({ title: questionsToAnswer[index], rating: 0, content: $("#contentArea").val(), categories: skills, userId: id, status: "underModeration" });
-    let resp = await network.posts.create(postsCreated[index]);                                                                                                       // TODO: add error checking, for the "Copied" err response first.
+    let resp = await network.posts.create(postsCreated[index]);
     responses.push(resp.pid);
     
     if (postsCreated.length === questionsToAnswer.length) {
-        if (otherId === undefined) {
-            $("#continueButton").unbind("click");
-            $("#continueButton").click(() => { setAnswers(responses); posts.setup() });
-            view.replaceButton($("#continueButton"), "#downArrow");
-        }
-        
         setupCommenting();
     } else {
         $("#contentArea").val("");
@@ -151,25 +137,17 @@ const nextStep = async () => {
 }
 
 const setupCommenting = async () => {
+    if (!otherId) view.replaceButton($("#continueButton"), "#downArrow");
     $("#contentArea").attr("maxlength", maxCommentLength);
     commenting = true;
 
-    for (let i = 0; i < skills.length; i++) {
-        let found = await network.posts.list({ categories: { $all: [skills[i]] }, status: "published" });
-        
-        for (let f = 0; f < found.length; f++) {
-            if (postsToComment.includes(found[f])) {
-                found.splice(f, 1);
-            }
-        }
-        
-        postsToComment = postsToComment.concat(found);
-        if (otherId === undefined && postsToComment.length !== 0) break;
+    for (let i = 0; i < (otherId ? 2 : 1); i++) {
+        let found = shuffle(await network.posts.list({ categories: { $all: [skills[i]] }, status: "published" }));
+        if (!found[0]) continue;
+        postsToComment.push(found[0]);
     }
 
     postsToComment = shuffle(postsToComment);
-    if (postsToComment.length === 1) postsToComment.push(postsToComment[0]);
-    postsToComment.splice(2);
     view.tasks.setQuestion(postsToComment[0].title);
     view.tasks.setupCommentingView(postsToComment[0].content);
 

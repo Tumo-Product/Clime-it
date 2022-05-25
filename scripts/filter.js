@@ -21,12 +21,12 @@ const filter = {
             filter.activated[skill] = true;
         }
 
-        await posts.reset();
+        posts.reset();
 
         let queries = [];
         for (const skill in filter.activated) {
             if (filter.activated[skill]) {
-                queries.push({ categories: { $all: [skill] } });
+                queries.push({ categories: { $all: [skill] }, status: "published" });
             }
         }
 
@@ -37,7 +37,7 @@ const filter = {
         let query = $("#searchBar").val().trim();
         await posts.reset();
         
-        let queries = [{ title: { $regex: query, $options: "i" } }, { content: { $regex: query, $options: "i" } }]; // options: i means case insensitive
+        let queries = [{ title: { $regex: query, $options: "i" } }, { content: { $regex: query, $options: "i" }, status: "published" }]; // options: i means case insensitive
         posts.setup(queries);
     },
 

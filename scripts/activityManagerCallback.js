@@ -12,7 +12,6 @@ window.addEventListener("message", event => {
         return;
     }
 
-    console.log(event.data.message);
     console.log(event.data);
 
     switch(event.data.message) {
